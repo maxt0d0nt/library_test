@@ -1,0 +1,33 @@
+<%- include('partials/header'); %>
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-7">
+
+
+        </div>
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form action="/addBook" method="post">
+                        <div class="form-group p-2">
+                            <input type="text" name="title" placeholder="Title" class="form-control">
+                        </div>
+                        <div class="form-group p-2">
+                            <input type="text" name="author" placeholder="Author" class="form-control">
+                        </div>
+                        <div class="form-group p-2">
+                            <input type="text" name="isbn" placeholder="ISBN" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            Save Book
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<%- include('partials/footer'); %>
