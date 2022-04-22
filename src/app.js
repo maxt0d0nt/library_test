@@ -7,6 +7,8 @@ const myConnection = require('express-myconnection');
 const app = express();
 
 const booksRouters = require('./routes/book');
+const indexRouters = require('./routes/indexRoutes');
+const { urlencoded } = require('body-parser');
 
 //settings
 app.set('port', process.env.PORT || 3000);
@@ -23,10 +25,12 @@ app.use(myConnection(mysql, {
     database: 'infosys_test',
 
 }, 'single'));
+app.use(express.urlencoded({extended: false}));
 
 
 //routes
 app.use('/', booksRouters);
+app.use('/', indexRouters);
 
 //statics file
 app.use(express.static(path.join(__dirname, 'public')));

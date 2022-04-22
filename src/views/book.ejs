@@ -3,13 +3,43 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>TITLE</th>
+                        <th>AUTHOR</th>
+                        <th>ISBN</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tboby>
+                    <% if (data) { %>
+                        <% for (var i=0; i < data.length; i++) { %>
+                            <tr>
+                                <td><%= data[i].id %></td>
+                                <td><%= data[i].title %></td>
+                                <td><%= data[i].author %></td>
+                                <td><%= data[i].isbn %></td>
+                                <td>
+                                    <a href="/deleteBook/<%= data[i].id %>" class="btn btn-danger">Delete</a>
+                                
+                                    <a href="/editBook/<%= data[i].id %>" class="btn btn-dark">Edit</a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% } %>
 
+                    </tboby>
+             
+            </table>
+            
 
         </div>
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <form action="/addBook" method="post">
+                    <form action="/addBook" method="POST">
                         <div class="form-group p-2">
                             <input type="text" name="title" placeholder="Title" class="form-control">
                         </div>
@@ -22,6 +52,7 @@
                         <button type="submit" class="btn btn-primary">
                             Save Book
                         </button>
+                        
                     </form>
                 </div>
             </div>
@@ -29,5 +60,7 @@
 
     </div>
 </div>
+
+
 
 <%- include('partials/footer'); %>
