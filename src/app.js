@@ -5,9 +5,10 @@ const morgan = require('morgan');
 const mysql = require('mysql');
 const myConnection = require('express-myconnection');
 const app = express();
-
+const readerRouter = require('./routes/readerRouter');
 const booksRouters = require('./routes/book');
 const indexRouters = require('./routes/indexRoutes');
+const borrowRouter = require('./routes/borrowRouter');
 const { urlencoded } = require('body-parser');
 
 //settings
@@ -29,8 +30,10 @@ app.use(express.urlencoded({extended: false}));
 
 
 //routes
-app.use('/', booksRouters);
 app.use('/', indexRouters);
+app.use('/book', booksRouters);
+app.use('/reader', readerRouter);
+app.use('/borrow', borrowRouter);
 
 //statics file
 app.use(express.static(path.join(__dirname, 'public')));

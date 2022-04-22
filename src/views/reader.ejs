@@ -1,7 +1,6 @@
 <%- include('partials/header'); %>
-
 <div>
-    <h1>BOOK'S LIST</h1>
+    <h1>READERS' LIST</h1>
 </div>
 
 <div class="container">
@@ -11,10 +10,10 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>TITLE</th>
-                        <th>AUTHOR</th>
-                        <th>ISBN</th>
-                        <th>ACTIONS</th>
+                        <th>NAME</th>
+                        <th>SURNAME</th>
+                        <th>E-MAIL</th>
+                        <th>PHONE</th>
                     </tr>
                 </thead>
                 <tboby>
@@ -22,21 +21,20 @@
                         <% for (var i=0; i < data.length; i++) { %>
                             <tr>
                                 <td><%= data[i].id %></td>
-                                <td><%= data[i].title %></td>
-                                <td><%= data[i].author %></td>
-                                <td><%= data[i].isbn %></td>
+                                <td><%= data[i].name_ %></td>
+                                <td><%= data[i].surname %></td>
+                                <td><%= data[i].Email %></td>
+                                <td><%= data[i].PhoneNumber %></td>
                                 <td>
-                                    <a href="/book/deleteBook/<%= data[i].id %>" class="btn btn-danger">Delete</a>
+                                    <a href="reader/deleteReader/<%= data[i].id %>" class="btn btn-danger">Delete</a>
                                 
-                                    <a href="/book/editBook/<%= data[i].id %>" class="btn btn-dark">Edit</a>
-
-                                    <a href="#/<%= data[i].id %>" class="btn btn-success">Borrow</a>
+                                    <a href="reader/editReader/<%= data[i].id %>" class="btn btn-dark">Edit</a>
                                 </td>
                             </tr>
                         <% } %>
                     <% } %>
 
-                </tboby>
+                    </tboby>
              
             </table>
             
@@ -45,18 +43,21 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <form action="/book/addBook" method="POST">
+                    <form action="/reader/addReader" method="POST">
                         <div class="form-group p-2">
-                            <input type="text" name="title" placeholder="Title" class="form-control">
+                            <input type="text" name="name_" placeholder="Name" class="form-control">
                         </div>
                         <div class="form-group p-2">
-                            <input type="text" name="author" placeholder="Author" class="form-control">
+                            <input type="text" name="surname" placeholder="Surname" class="form-control">
                         </div>
                         <div class="form-group p-2">
-                            <input type="text" name="isbn" placeholder="ISBN" class="form-control">
+                            <input type="text" name="Email" placeholder="Email" class="form-control">
+                        </div>
+                        <div class="form-group p-2">
+                            <input type="text" name="PhoneNumber" placeholder="Phone" class="form-control">
                         </div>
                         <button type="submit" class="btn btn-primary">
-                            Save Book
+                            Save Reader
                         </button>
                         
                     </form>
