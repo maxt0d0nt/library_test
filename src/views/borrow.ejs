@@ -1,7 +1,7 @@
 <%- include('partials/header'); %>
 
 <div>
-    <h1>BORROWED BOOKS LIST</h1>
+    <h1>LOAN'S BOOKS LIST</h1>
 </div>
 
 <div class="container">
@@ -10,22 +10,23 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>ID BOOK</th>
                         <th>TITLE</th>
-                        <th>ID READER</th>
+                        <th>AUTHOR</th>
+                        <th>ISBN</th>
                         <th>NAME</th>
-                        <th>BORROW DATE</th>
-                        <th>RETURN DATE</th>
+                        <th>SURNAME</th>
+                        <th>DATE BORROWED</th>
                     </tr>
                 </thead>
                 <tboby>
                     <% if (data) { %>
                         <% for (var i=0; i < data.length; i++) { %>
                             <tr>
-                                <td><%= data[i].book_id %></td>
-                                <td><%= data[i].book_id %></td>
-                                <td><%= data[i].reader_id %></td>
-                                <td><%= data[i].reader_id %></td>
+                                <td><%= data[i].title %></td>
+                                <td><%= data[i].author %></td>
+                                <td><%= data[i].isbn %></td>
+                                <td><%= data[i].name_ %></td>
+                                <td><%= data[i].surname %></td>
                                 <td><%= data[i].borrowDate %></td>
                               
                             </tr>

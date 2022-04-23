@@ -26,7 +26,7 @@ app.use(myConnection(mysql, {
     database: 'infosys_test',
 
 }, 'single'));
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 
 
 //routes

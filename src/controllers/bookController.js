@@ -52,7 +52,7 @@ req.getConnection((err, conn) => {
     })
 })
 
-}
+};
 
 controller.delete = (req, res) => {
     const id = req.params.id;
@@ -62,7 +62,49 @@ controller.delete = (req, res) => {
             res.redirect('/book');
         })
     })
+};
+
+controller.borrow = (req, res) => {
+    const id = req.params.id;
+    req.getConnection((err, conn) => {
+        conn.query('SELECT * FROM Books WHERE id = ?', [id], (err, books) => {
+            if (err) {
+                res.json(err);
+            }
+            console.log(books)
+            res.render('borrowAdd', {
+                data: books
+               
+            });
+                     
+        })
+     });
+
 }
+
+controller.loan = (req, res) => {
+
+    const data = req.body;
+    const id = data.id;
+    const re_id = data.reader_id
+    console.log(data)
+    console.log(id)
+    console.log(re_id)
+
+    //res.send("hola ary")
+        
+    req.getConnection((err, conn) => {
+    conn.query('INSERT INTO Borrows (reader_id, book_id) VALUE (?,?)', [re_id, id], (err, borrow) => {
+        console.log(borrow)
+        res.send("hola ary")
+        });
+    });
+}
+
+
+
+
+
 
 
 

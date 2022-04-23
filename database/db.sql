@@ -23,6 +23,20 @@ CREATE TABLE Readers (
 );
 
 
+CREATE TABLE prestamos
+
+SELECT books.title, 
+books.author, 
+books.isbn, 
+readers.id, 
+readers.name_, 
+readers.surname 
+Borrows.DATETIME
+FROM books 
+INNER JOIN borrows ON books.id = borrows.book_id 
+INNER JOIN readers ON readers.id = borrows.reader_id;
+
+
 CREATE TABLE Borrows (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     reader_id INT NOT NULL,
@@ -31,6 +45,11 @@ CREATE TABLE Borrows (
     FOREIGN KEY(book_id) REFERENCES Books(id), 
     borrowDate DATETIME NOT NULL
 );
+
+
+SELECT * FROM books
+CROSS JOIN readers
+WHERE books.id = 1 AND readers.id = 1
 
 SHOW TABLES;
 
