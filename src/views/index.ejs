@@ -17,4 +17,17 @@
     <a href="/borrow" class="btn btn-dark w-75">LOAN'S BOOKS</a>
 </div>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<% if(typeof alert != "undefined" ){ %>
+
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Sorry! this book is NOT FOR YOUUUU!!',
+    text: 'Try other! theres a lot more',
+    footer: ''
+  })
+</script>
+<% } %>
+
 <%- include('partials/footer'); %>

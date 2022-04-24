@@ -1,3 +1,4 @@
+const { doesNotMatch } = require('assert');
 const { validationResult } = require('express-validator');
 
 const controller = {};
@@ -88,8 +89,29 @@ controller.delete = (req, res) => {
 
 controller.borrow = (req, res) => {
     const id = req.params.id;
+
     req.getConnection((err, conn) => {
+        conn.query(('SELECT * FROM Borrows'), (err, borrow) => {
+            console.log(borrow)
+            for (i = 0; i < borrow.length; i++){
+                if ( borrow[i].book_id == id){
+                    
+                    res.render('index', {
+                        data: borrow,
+                        alert: true,
+                        aletrTitle: "Borrow",
+                        alertIcon: 'failed',
+                        alertMessage: 'Sorry, This Book is not FOR YOU!!',
+                        showConfirmButton: true,
+                        timer:2000,
+                        ruta:''
+                    })
+                }}
+            })})
+
+      req.getConnection((err, conn) => {
         conn.query('SELECT * FROM Books WHERE id = ?', [id], (err, books) => {
+            
             if (err) {
                 res.json(err);
             }
@@ -101,7 +123,7 @@ controller.borrow = (req, res) => {
                      
         })
      });
-
+    
 }
 
 controller.loan = (req, res) => {
@@ -111,11 +133,12 @@ controller.loan = (req, res) => {
     const re_id = data.reader_id
     const errors = validationResult(req);
 
+    
     if (errors.isEmpty()){
        const data = req.body;
 
        req.getConnection((err, conn) => {
-        conn.query('INSERT INTO Borrows (reader_id, book_id, borrowDate, returnDate) VALUE (?,?, now(), now() )', [re_id, id], (err, borrow) => {
+        conn.query('INSERT INTO Borrows (reader_id, book_id, borrowDate, returnDate) VALUE (?,?, CURRENT_DATE(), CURRENT_DATE() + 5 )', [re_id, id], (err, borrow) => {
             console.log(borrow)
             res.redirect('/book')
             
@@ -123,7 +146,7 @@ controller.loan = (req, res) => {
 
     })
 
-} else {
+    } else {
 
     const ids = req.params.id;
     req.getConnection((err, conn) => {
@@ -140,9 +163,9 @@ controller.loan = (req, res) => {
         })
      })
    
-}};
+    }
 
-
+}
 
 
 

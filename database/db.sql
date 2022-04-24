@@ -31,8 +31,8 @@ books.isbn,
 readers.id, 
 readers.name_, 
 readers.surname, 
-borrows.borrowDate,
-borrows.returnDate
+DATE_FORMAT(borrows.borrowDate, "%M %d %Y"),
+DATE_FORMAT(borrows.returnDate, "%M %d %Y")
 FROM books 
 INNER JOIN borrows ON books.id = borrows.book_id 
 INNER JOIN readers ON readers.id = borrows.reader_id;
@@ -47,7 +47,6 @@ CREATE TABLE Borrows (
     borrowDate DATETIME NOT NULL,
     returnDate DATETIME
 );
-
 
 SELECT * FROM books
 CROSS JOIN readers

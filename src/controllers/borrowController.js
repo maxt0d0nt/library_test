@@ -3,7 +3,7 @@ const controller = {};
 controller.list = (req, res) => {
 
     req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM books INNER JOIN borrows ON books.id = borrows.book_id INNER JOIN readers ON readers.id = borrows.reader_id;', (err, prestamo) => {
+        conn.query('SELECT * FROM books INNER JOIN borrows ON books.id = borrows.book_id INNER JOIN readers ON readers.id = borrows.reader_id; ', (err, prestamo) => {
             if (err) {
                 res.json(err);
             }
