@@ -4,42 +4,42 @@
     <h1>BORROW A BOOK</h1>
 </div>
 
-<div class="container">
+<div class="container mt-5">
     <div class="row">
-        <div class="col">
+        <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
                     <form action="/book/borrowBook" method="POST">
                         <div class="form-group p-2">
+                            <label>BOOK ID</label>
                             <input type="text" name="id"  value="<%= data[0].id %>" class="form-control">
                         </div>
                         <div class="form-group p-2">
+                            <label>TITLE</label>
                             <input type="text" name="title"  value="<%= data[0].title %>" class="form-control">
                         </div>
                         <div class="form-group p-2">
+                            <label>AUTHOR</label>
                             <input type="text" name="author"  value="<%= data[0].author %>" class="form-control">
                         </div>
                         <div class="form-group p-2">
+                            <label>ISBN</label>
                             <input type="text" name="isbn"  value="<%= data[0].isbn %>" class="form-control">
                         </div>
-                        <input type="search" name="reader_id"  placeholder="ID NUMBER" class="form-control">
+                        <div class="form-group p-2">
+                        <label>USER ID</label>
+                        <input type="search" name="reader_id"  placeholder="READER ID NUMBER" class="form-control">
                         <button type="submit" class="btn btn-primary ">
                                 SEND READERS ID
                         </button>
+                        </div>
                         </div>
                         
                                              
                     </form>
                 </div>
-            </div>
-            <div class="row p-3">
-                
-              
-                
-            </div>
-       
-        
-    </div>
+            </div>  
+        </div>
     </div>
     
     

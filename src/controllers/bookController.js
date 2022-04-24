@@ -87,16 +87,11 @@ controller.loan = (req, res) => {
     const data = req.body;
     const id = data.id;
     const re_id = data.reader_id
-    console.log(data)
-    console.log(id)
-    console.log(re_id)
-
-    //res.send("hola ary")
-        
+           
     req.getConnection((err, conn) => {
-    conn.query('INSERT INTO Borrows (reader_id, book_id) VALUE (?,?)', [re_id, id], (err, borrow) => {
+    conn.query('INSERT INTO Borrows (reader_id, book_id, borrowDate, returnDate) VALUE (?,?, now(), now() )', [re_id, id], (err, borrow) => {
         console.log(borrow)
-        res.send("hola ary")
+        res.redirect('/book')
         });
     });
 }

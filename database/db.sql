@@ -30,8 +30,9 @@ books.author,
 books.isbn, 
 readers.id, 
 readers.name_, 
-readers.surname 
-Borrows.DATETIME
+readers.surname, 
+borrows.borrowDate,
+borrows.returnDate
 FROM books 
 INNER JOIN borrows ON books.id = borrows.book_id 
 INNER JOIN readers ON readers.id = borrows.reader_id;
@@ -43,7 +44,8 @@ CREATE TABLE Borrows (
     FOREIGN KEY(reader_id) REFERENCES Readers(id),
     book_id INT NOT NULL,
     FOREIGN KEY(book_id) REFERENCES Books(id), 
-    borrowDate DATETIME NOT NULL
+    borrowDate DATETIME NOT NULL,
+    returnDate DATETIME
 );
 
 

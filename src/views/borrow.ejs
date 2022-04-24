@@ -6,28 +6,36 @@
 
 <div class="container">
     <div class="row mt-5">
-        <div class="col-md-7">
+        <div class="col-md-9">
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
+                        <th>ID BOOK</th>
                         <th>TITLE</th>
                         <th>AUTHOR</th>
                         <th>ISBN</th>
                         <th>NAME</th>
                         <th>SURNAME</th>
                         <th>DATE BORROWED</th>
+                        <th>RETURN DATE</th>
+                        <th>RETURNED</th>
                     </tr>
                 </thead>
                 <tboby>
                     <% if (data) { %>
                         <% for (var i=0; i < data.length; i++) { %>
                             <tr>
+                                <td><%= data[i].book_id %></td>
                                 <td><%= data[i].title %></td>
                                 <td><%= data[i].author %></td>
                                 <td><%= data[i].isbn %></td>
                                 <td><%= data[i].name_ %></td>
                                 <td><%= data[i].surname %></td>
                                 <td><%= data[i].borrowDate %></td>
+                                <td><%= data[i].returnDate %></td>
+                                <td> 
+                                    <a href="/borrow/<%= data[i].book_id %>" " class="btn btn-dark ">RETURNED</a>
+                                </td>
                               
                             </tr>
                         <% } %>
