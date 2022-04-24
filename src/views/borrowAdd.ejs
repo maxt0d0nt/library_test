@@ -9,7 +9,14 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <form action="/book/borrowBook" method="POST">
+                    <form action="/book/borrowBook/<%= data[0].id %>" method="POST">
+                        <% if (locals.errors){
+                            errors.forEach(error => { %>
+                            <p><%= error.msg %> </p>
+                        <%
+                            })
+                        } %>
+                        
                         <div class="form-group p-2">
                             <label>BOOK ID</label>
                             <input type="text" name="id"  value="<%= data[0].id %>" class="form-control">

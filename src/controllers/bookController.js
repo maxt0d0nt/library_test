@@ -109,14 +109,38 @@ controller.loan = (req, res) => {
     const data = req.body;
     const id = data.id;
     const re_id = data.reader_id
-           
-    req.getConnection((err, conn) => {
-    conn.query('INSERT INTO Borrows (reader_id, book_id, borrowDate, returnDate) VALUE (?,?, now(), now() )', [re_id, id], (err, borrow) => {
-        console.log(borrow)
-        res.redirect('/book')
+    const errors = validationResult(req);
+
+    if (errors.isEmpty()){
+       const data = req.body;
+
+       req.getConnection((err, conn) => {
+        conn.query('INSERT INTO Borrows (reader_id, book_id, borrowDate, returnDate) VALUE (?,?, now(), now() )', [re_id, id], (err, borrow) => {
+            console.log(borrow)
+            res.redirect('/book')
+            
         });
-    });
-}
+
+    })
+
+} else {
+
+    const ids = req.params.id;
+    req.getConnection((err, conn) => {
+        conn.query('SELECT * FROM Books WHERE id = ?', [ids], (err, books) => {
+            if (err) {
+                res.json(err);
+            }
+             res.render('borrowAdd', {
+                data: books,
+                errors: errors.array(),
+                old: req.body
+            });
+                     
+        })
+     })
+   
+}};
 
 
 
