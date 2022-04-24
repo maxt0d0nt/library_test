@@ -1,4 +1,7 @@
+const { validationResult } = require('express-validator');
+
 const controller = {};
+
 
 controller.list = (req, res) => {
 
@@ -15,20 +18,39 @@ controller.list = (req, res) => {
                      
         })
      })
+
 };
 
 controller.add = (req, res) => {
 
-    const data = req.body;
+    let errors = validationResult(req);
+    if (errors.isEmpty()){
+       const data = req.body;
 
-    req.getConnection((err, conn) => {
-    conn.query('INSERT INTO Books set ?', [data], (err, books) => {
+        req.getConnection((err, conn) => {
+        conn.query('INSERT INTO Books set ?', [data], (err, books) => {
         res.redirect('/book');
 
     });
 });
-    
-};
+} else {
+
+    req.getConnection((err, conn) => {
+        conn.query('SELECT * FROM Books', (err, books) => {
+            if (err) {
+                res.json(err);
+            }
+            
+            res.render('book', {
+                data: books,
+                errors: errors.array(),
+                old: req.body
+            });
+                     
+        })
+     })
+   
+}};
 
 controller.edit = (req, res) => {
     const id = req.params.id;
