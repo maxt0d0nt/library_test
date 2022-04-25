@@ -1,12 +1,13 @@
 const { doesNotMatch } = require('assert');
 const { validationResult } = require('express-validator');
+const { networkInterfaces } = require('os');
 
 const controller = {};
 
 
-controller.list = (req, res) => {
+controller.list = async (req, res) => {
 
-     req.getConnection((err, conn) => {
+     await req.getConnection((err, conn) => {
         conn.query('SELECT * FROM Books', (err, books) => {
             if (err) {
                 res.json(err);
@@ -22,13 +23,13 @@ controller.list = (req, res) => {
 
 };
 
-controller.add = (req, res) => {
+controller.add = async (req, res) => {
 
     let errors = validationResult(req);
     if (errors.isEmpty()){
        const data = req.body;
 
-        req.getConnection((err, conn) => {
+       await req.getConnection((err, conn) => {
         conn.query('INSERT INTO Books set ?', [data], (err, books) => {
         res.redirect('/book');
 
@@ -36,7 +37,7 @@ controller.add = (req, res) => {
 });
 } else {
 
-    req.getConnection((err, conn) => {
+     await req.getConnection((err, conn) => {
         conn.query('SELECT * FROM Books', (err, books) => {
             if (err) {
                 res.json(err);
@@ -87,15 +88,18 @@ controller.delete = (req, res) => {
     })
 };
 
-controller.borrow = (req, res) => {
-    const id = req.params.id;
 
-    req.getConnection((err, conn) => {
+controller.borrow = async (req, res) => {
+    const id = req.params.id;
+    
+   await req.getConnection ((err, conn) => {
         conn.query(('SELECT * FROM Borrows'), (err, borrow) => {
-            console.log(borrow)
+                                 console.log(borrow)
+                                 
             for (i = 0; i < borrow.length; i++){
-                if ( borrow[i].book_id == id){
-                    
+                
+                if ( borrow[i].book_id == id && borrow[i].returnDate == null){
+                                
                     res.render('index', {
                         data: borrow,
                         alert: true,
@@ -103,13 +107,13 @@ controller.borrow = (req, res) => {
                         alertIcon: 'failed',
                         alertMessage: 'Sorry, This Book is not FOR YOU!!',
                         showConfirmButton: true,
-                        timer:2000,
+                        timer:20,
                         ruta:''
                     })
                 }}
             })})
 
-      req.getConnection((err, conn) => {
+       await req.getConnection((err, conn) => {
         conn.query('SELECT * FROM Books WHERE id = ?', [id], (err, books) => {
             
             if (err) {
@@ -138,7 +142,7 @@ controller.loan = (req, res) => {
        const data = req.body;
 
        req.getConnection((err, conn) => {
-        conn.query('INSERT INTO Borrows (reader_id, book_id, borrowDate, returnDate) VALUE (?,?, CURRENT_DATE(), CURRENT_DATE() + 5 )', [re_id, id], (err, borrow) => {
+        conn.query('INSERT INTO Borrows (reader_id, book_id, borrowDate) VALUE (?,?, CURRENT_DATE())', [re_id, id], (err, borrow) => {
             console.log(borrow)
             res.redirect('/book')
             

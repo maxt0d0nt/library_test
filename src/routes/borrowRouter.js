@@ -3,6 +3,6 @@ const router = express.Router();
 const borrowController = require('../controllers/borrowController');
 
 router.get('/', borrowController.list);
-router.get('/:id', borrowController.delete);
+router.get('/:id', borrowController.return);
 
 module.exports = router;

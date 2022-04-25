@@ -19,12 +19,26 @@ controller.list = (req, res) => {
 
 controller.delete = (req, res) => {
     const id = req.params.id;
-    //console.log(id)
-   // res.send("borrdo")
+  
     req.getConnection((err, conn) => {
-        conn.query('DELETE FROM borrows WHERE book_id = ?', [id], (err, prestamo) => {
+        conn.query('DELETE FROM Borrows WHERE book_id = ?', [id], (err, books) => {
+            
             res.render("index")
         })
+    })
+
+    }
+
+controller.return = (req, res) => {
+    const id = req.params.id;
+  
+    req.getConnection((err, conn) => {
+        conn.query('UPDATE Borrows set returnDate = CURRENT_DATE() WHERE book_id = ?', [id], (err, books) => {
+            conn.query('', [id], (err, prestamo) => {
+            res.render("index")
+        })
+    })
+
     })
 }
 

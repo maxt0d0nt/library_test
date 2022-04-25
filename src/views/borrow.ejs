@@ -16,6 +16,7 @@
                         <th>ISBN</th>
                         <th>NAME</th>
                         <th>SURNAME</th>
+                        <th>PHONE</th>
                         <th>DATE BORROWED</th>
                         <th>RETURN DATE</th>
                         <th>RETURNED</th>
@@ -31,8 +32,14 @@
                                 <td><%= data[i].isbn %></td>
                                 <td><%= data[i].name_ %></td>
                                 <td><%= data[i].surname %></td>
-                                <td><%= data[i].borrowDate %></td>
-                                <td><%= data[i].returnDate %></td>
+                                <td><%= data[i].PhoneNumber %></td>
+                                <td><%= data[i].borrowDate.toDateString() %></td>
+                                <td><% if (data[i].returnDate != null ) { %> 
+                                    
+                                    <%= data[i].borrowDate.toDateString() %>
+                                
+                                <% } %> </td>
+                                
                                 <td> 
                                     <a href="/borrow/<%= data[i].book_id %>" " class="btn btn-dark ">RETURNED</a>
                                 </td>
@@ -41,7 +48,7 @@
                         <% } %>
                     <% } %>
 
-                </tboby>
+                </tboby> 
                             
             </table>
             

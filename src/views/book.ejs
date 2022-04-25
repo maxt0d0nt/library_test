@@ -1,5 +1,6 @@
 <%- include('partials/header'); %>
 
+
 <div>
     <h1>BOOK'S LIST</h1>
 </div>
@@ -26,11 +27,12 @@
                                 <td><%= data[i].author %></td>
                                 <td><%= data[i].isbn %></td>
                                 <td>
-                                    <a href="/book/deleteBook/<%= data[i].id %>" class="btn btn-danger">Delete</a>
-                                
-                                    <a href="/book/editBook/<%= data[i].id %>" class="btn btn-dark">Edit</a>
+                                    <a href="/book/deleteBook/<%= data[i].id %>" id="delete" class="btn btn-danger ">Delete</a>
+                        
+                                    <a href="/book/editBook/<%= data[i].id %>" id=""class="btn btn-dark">Edit</a>
 
                                     <a href="/book/borrowBook/<%= data[i].id %>" class="btn btn-success">Borrow</a>
+
                                 </td>
                             </tr>
                         <% } %>
@@ -74,6 +76,35 @@
     </div>
 </div>
 
+ 
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $('href').submit(function(e){ 
+        e.preventDefault()
+    
+
+
+ Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+}) 
+})
+    
+</script>
 
 <%- include('partials/footer'); %>
