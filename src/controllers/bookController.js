@@ -58,7 +58,7 @@ controller.edit = (req, res) => {
     const id = req.params.id;
 
     req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM Books WHERE id = ?', [id], (err, books) => {
+        conn.query('SELECT * FROM Books WHERE id_book = ?', [id], (err, books) => {
             res.render('bookEdit', {
                 data: books
             })
@@ -71,7 +71,7 @@ controller.update = (req, res) => {
     const updateBook = req.body;
 
 req.getConnection((err, conn) => {
-    conn.query('UPDATE Books set ? WHERE id = ?', [updateBook, id], (err, books) => {
+    conn.query('UPDATE Books set ? WHERE id_book = ?', [updateBook, id], (err, books) => {
         res.redirect('/book');
     })
 })
@@ -82,7 +82,7 @@ controller.delete = (req, res) => {
     const id = req.params.id;
 
     req.getConnection((err, conn) => {
-        conn.query('DELETE FROM Books WHERE id = ?', [id], (err, books) => {
+        conn.query('DELETE FROM Books WHERE id_book = ?', [id], (err, books) => {
             res.redirect('/book');
         })
     })
@@ -114,7 +114,7 @@ controller.borrow = async (req, res) => {
             })})
 
        await req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM Books WHERE id = ?', [id], (err, books) => {
+        conn.query('SELECT * FROM Books WHERE id_book = ?', [id], (err, books) => {
             
             if (err) {
                 res.json(err);
@@ -135,6 +135,7 @@ controller.loan = (req, res) => {
     const data = req.body;
     const id = data.id;
     const re_id = data.reader_id
+    
     const errors = validationResult(req);
 
     
@@ -154,7 +155,7 @@ controller.loan = (req, res) => {
 
     const ids = req.params.id;
     req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM Books WHERE id = ?', [ids], (err, books) => {
+        conn.query('SELECT * FROM Books WHERE id_book = ?', [ids], (err, books) => {
             if (err) {
                 res.json(err);
             }

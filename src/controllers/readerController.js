@@ -54,7 +54,7 @@ controller.edit = (req, res) => {
     const id = req.params.id;
 
     req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM readers WHERE id = ?', [id], (err, Readers) => {
+        conn.query('SELECT * FROM readers WHERE id_reader = ?', [id], (err, Readers) => {
             res.render('readerEdit', {
                 data: Readers
             })
@@ -67,7 +67,7 @@ controller.update = (req, res) => {
     const updateReader= req.body;
 
 req.getConnection((err, conn) => {
-    conn.query('UPDATE readers set ? WHERE id = ?', [updateReader, id], (err, Reader) => {
+    conn.query('UPDATE readers set ? WHERE id_reader = ?', [updateReader, id], (err, Reader) => {
         res.redirect('/reader');
     })
 })
@@ -78,7 +78,7 @@ controller.delete = (req, res) => {
     const id = req.params.id;
 
     req.getConnection((err, conn) => {
-        conn.query('DELETE FROM Readers WHERE id = ?', [id], (err, Reader) => {
+        conn.query('DELETE FROM Readers WHERE id_reader = ?', [id], (err, Reader) => {
             res.redirect('/reader');
         })
     })

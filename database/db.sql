@@ -25,7 +25,9 @@ CREATE TABLE Readers (
 
 CREATE TABLE prestamos
 
-SELECT books.title, 
+SELECT 
+borrows.id as borrows_id,
+books.title, 
 books.author, 
 books.isbn, 
 readers.id, 

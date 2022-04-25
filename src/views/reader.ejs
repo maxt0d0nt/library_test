@@ -20,15 +20,15 @@
                     <% if (data) { %>
                         <% for (var i=0; i < data.length; i++) { %>
                             <tr>
-                                <td><%= data[i].id %></td>
+                                <td><%= data[i].id_reader %></td>
                                 <td><%= data[i].name_ %></td>
                                 <td><%= data[i].surname %></td>
                                 <td><%= data[i].Email %></td>
                                 <td><%= data[i].PhoneNumber %></td>
                                 <td>
-                                    <a href="reader/deleteReader/<%= data[i].id %>" class="btn btn-danger">Delete</a>
+                                    <a href="reader/deleteReader/<%= data[i].id_reader %>" class="btn btn-danger">Delete</a>
                                 
-                                    <a href="reader/editReader/<%= data[i].id %>" class="btn btn-dark">Edit</a>
+                                    <a href="reader/editReader/<%= data[i].id_reader %>" class="btn btn-dark">Edit</a>
                                 </td>
                             </tr>
                         <% } %>
