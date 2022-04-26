@@ -2,7 +2,7 @@
 <%- include('partials/header'); %>
 
 <div>
-    <h1>LOAN'S BOOKS LIST</h1>
+    <h1>BORROWED'S BOOKS LIST</h1>
 </div>
 
 <div class="container">
@@ -44,7 +44,8 @@
                                 
                                 <% } %> 
                                 </td> 
-                                <td><%= data[i].comment %></td>                          
+                                <td><%= data[i].comment %></td> 
+             
                                 <td> 
                                     <div class="d-flex justify-content-around p-2">
                                     <a href="/borrow/<%= data[i].id_borrow %>" " class="btn btn-success">RETURNED</a>
@@ -57,9 +58,13 @@
                             </tr>
                         <% } %>
                     <% } %>
+                    <script>
+                        $('btn.btn-danger').click(function () { return confirm("Are you sure?")})
+                    </script>
+                                   
 
                 </tboby> 
-                            
+                       
             </table>
             
 

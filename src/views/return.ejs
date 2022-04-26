@@ -9,12 +9,10 @@
             <div class="card-body">
                 <form action="/borrow/<%= data[0].id_borrow %>" method="POST">
                  
-
                     <div class="form-group p-2">
                         <input type="text" name="comment" value="<%= data[0].comment %>" placeholder="Comments here" class="form-control">
                     </div>
-
-                                       
+              
                     <button type="submit" class="btn btn-primary">
                         RETURN
                     </button>

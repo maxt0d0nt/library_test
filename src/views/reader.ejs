@@ -33,17 +33,15 @@
                             </tr>
                         <% } %>
                     <% } %>
-
-                    </tboby>
-             
+                </tboby>
             </table>
-            
-
         </div>
+
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
                     <form action="/reader" method="POST">
+
                         <div class="form-group p-2">
                             <% if (locals.errors){
                                 errors.forEach(error => { %>
@@ -53,24 +51,26 @@
                             } %>
                             <input type="text" name="name_" placeholder="Name" value="<%= locals.old && old.name_ ? old.name_ : '' %>" class="form-control">
                         </div>
+
                         <div class="form-group p-2">
                             <input type="text" name="surname" placeholder="Surname" value="<%= locals.old && old.surname ? old.surname : '' %>"class="form-control">
                         </div>
+
                         <div class="form-group p-2">
                             <input type="text" name="Email" placeholder="Email" value="<%= locals.old && old.Email ? old.Email : '' %>"class="form-control">
                         </div>
+
                         <div class="form-group p-2">
                             <input type="text" name="PhoneNumber" placeholder="Phone" value="<%= locals.old && old.PhoneNumber ? old.PhoneNumber : '' %>"class="form-control">
                         </div>
+
                         <button type="submit" class="btn btn-primary">
                             Save Reader
                         </button>
-                        
                     </form>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 

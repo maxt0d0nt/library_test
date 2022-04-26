@@ -31,6 +31,9 @@ controller.add = async (req, res) => {
 
        await req.getConnection((err, conn) => {
         conn.query('INSERT INTO Books set ?', [data], (err, books) => {
+            if (err) {
+                res.json(err);
+            }
         res.redirect('/book');
 
     });
@@ -54,11 +57,14 @@ controller.add = async (req, res) => {
    
 }};
 
-controller.edit = (req, res) => {
+controller.edit = async (req, res) => {
     const id = req.params.id;
 
-    req.getConnection((err, conn) => {
+    await req.getConnection((err, conn) => {
         conn.query('SELECT * FROM Books WHERE id_book = ?', [id], (err, books) => {
+            if (err) {
+                res.json(err);
+            }
             res.render('bookEdit', {
                 data: books
             })
@@ -66,23 +72,29 @@ controller.edit = (req, res) => {
    })
 }
 
-controller.update = (req, res) => {
+controller.update = async (req, res) => {
     const id = req.params.id;
     const updateBook = req.body;
 
-req.getConnection((err, conn) => {
-    conn.query('UPDATE Books set ? WHERE id_book = ?', [updateBook, id], (err, books) => {
-        res.redirect('/book');
+    await req.getConnection((err, conn) => {
+        conn.query('UPDATE Books set ? WHERE id_book = ?', [updateBook, id], (err, books) => {
+            if (err) {
+                res.json(err);
+            }
+             res.redirect('/book');
     })
 })
 
 };
 
-controller.delete = (req, res) => {
+controller.delete = async (req, res) => {
     const id = req.params.id;
 
-    req.getConnection((err, conn) => {
+    await req.getConnection((err, conn) => {
         conn.query('DELETE FROM Books WHERE id_book = ?', [id], (err, books) => {
+            if (err) {
+                res.json(err);
+            }
             res.redirect('/book');
         })
     })
@@ -103,12 +115,11 @@ controller.borrow = async (req, res) => {
                     res.render('index', {
                         data: borrow,
                         alert: true,
-                        aletrTitle: "Borrow",
+                        alertTitle: "Borrow",
                         alertIcon: 'failed',
-                        alertMessage: 'Sorry, This Book is not FOR YOU!!',
+                        alertMessage: 'Sorry, This Book ',
                         showConfirmButton: true,
-                        timer:20,
-                        ruta:''
+                        timer:2000,
                     })
                 }}
             })})
@@ -121,8 +132,8 @@ controller.borrow = async (req, res) => {
             }
             console.log(books)
             res.render('borrowAdd', {
-                data: books
-               
+                data: books,
+                
             });
                      
         })
@@ -130,7 +141,7 @@ controller.borrow = async (req, res) => {
     
 }
 
-controller.loan = (req, res) => {
+controller.loan = async (req, res) => {
 
     const data = req.body;
     const id = data.id;
@@ -142,8 +153,13 @@ controller.loan = (req, res) => {
     if (errors.isEmpty()){
        const data = req.body;
 
-       req.getConnection((err, conn) => {
+       await req.getConnection((err, conn) => {
+           
         conn.query('INSERT INTO Borrows (reader_id, book_id, borrowDate) VALUE (?,?, CURRENT_DATE())', [re_id, id], (err, borrow) => {
+            if (err) {
+             
+               res.send("This reader ID is not available");
+            }
             console.log(borrow)
             res.redirect('/book')
             
@@ -154,11 +170,11 @@ controller.loan = (req, res) => {
     } else {
 
     const ids = req.params.id;
-    req.getConnection((err, conn) => {
-        conn.query('SELECT * FROM Books WHERE id_book = ?', [ids], (err, books) => {
-            if (err) {
+        await req.getConnection((err, conn) => {
+            conn.query('SELECT * FROM Books WHERE id_book = ?', [ids], (err, books) => {
+                if (err) {
                 res.json(err);
-            }
+                }
              res.render('borrowAdd', {
                 data: books,
                 errors: errors.array(),

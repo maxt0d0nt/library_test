@@ -39,11 +39,9 @@
                     <% } %>
 
                 </tboby>
-             
             </table>
-            
-
         </div>
+
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
@@ -58,12 +56,15 @@
                         <div class="form-group p-2">
                             <input type="text" name="title" placeholder="Title" value="<%= locals.old && old.title ? old.title : '' %>" class="form-control">
                         </div>
+
                         <div class="form-group p-2">
                             <input type="text" name="author" placeholder="Author" value="<%= locals.old && old.author ? old.author : '' %>"class="form-control">
                         </div>
+
                         <div class="form-group p-2">
                             <input type="text" name="isbn" placeholder="ISBN" value="<%= locals.old && old.isbn ? old.isbn : '' %>" class="form-control">
                         </div>
+
                         <button type="submit" class="btn btn-primary">
                             Save Book
                         </button>
@@ -72,39 +73,9 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
- 
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-<script>
-    $('href').submit(function(e){ 
-        e.preventDefault()
-    
-
-
- Swal.fire({
-  title: 'Are you sure?',
-  text: "You won't be able to revert this!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Yes, delete it!'
-}).then((result) => {
-  if (result.isConfirmed) {
-    Swal.fire(
-      'Deleted!',
-      'Your file has been deleted.',
-      'success'
-    )
-  }
-}) 
-})
-    
-</script>
 
 <%- include('partials/footer'); %>

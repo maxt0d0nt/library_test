@@ -1,10 +1,13 @@
 <%- include('partials/header'); %>
+
 <div class="d-flex justify-content-center align-self-center">
 <h1>LIBRARY</h1>
 </div>
+
 <div class="d-flex justify-content-center align-self-center">
 <h3>Choose a option</h3>
 </div>
+
 <div class=" d-flex w-100 justify-content-center align-self-center p-3 ">
 <a href="/book" class="btn btn-primary w-75">BOOKS</a>
 </div>
@@ -14,20 +17,19 @@
 </div>
 
 <div class=" d-flex w-100 justify-content-center align-self-center p-3 ">
-    <a href="/borrow" class="btn btn-dark w-75">LOAN'S BOOKS</a>
+    <a href="/borrow" class="btn btn-dark w-75">BORROWED BOOKS</a>
 </div>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<% if(typeof alert != "undefined" ){ %>
+    <% if(typeof alert != "undefined" ){ %>
 
-<script>
-Swal.fire({
-    icon: 'error',
-    title: 'Sorry! this book is not available',
-    text: 'Try other! theres a lot more =)',
-    footer: ''
-  })
-</script>
-<% } %>
+    <script>
+        Swal.fire({
+        icon: 'error',
+        title: 'Sorry! this book is not available',
+        text: 'Try other! theres a lot more =)',
+        footer: ''
+     })
+    </script>
+    <% } %>
 
 <%- include('partials/footer'); %>

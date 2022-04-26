@@ -10,15 +10,19 @@
             <div class="card">
                 <div class="card-body">
                     <form action="/book/editBook/<%= data[0].id_book %>" method="POST">
+                        
                         <div class="form-group p-2">
                             <input type="text" name="title"  value="<%= data[0].title %>" class="form-control">
                         </div>
+
                         <div class="form-group p-2">
                             <input type="text" name="author"  value="<%= data[0].author %>" class="form-control">
                         </div>
+
                         <div class="form-group p-2">
                             <input type="text" name="isbn"  value="<%= data[0].isbn %>" class="form-control">
                         </div>
+
                         <button type="submit" class="btn btn-primary">
                             Edit Book
                         </button>
