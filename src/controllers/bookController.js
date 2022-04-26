@@ -133,7 +133,7 @@ controller.borrow = async (req, res) => {
             console.log(books)
             res.render('borrowAdd', {
                 data: books,
-                
+               
             });
                      
         })
@@ -149,7 +149,7 @@ controller.loan = async (req, res) => {
     
     const errors = validationResult(req);
 
-    
+
     if (errors.isEmpty()){
        const data = req.body;
 
